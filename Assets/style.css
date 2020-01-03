@@ -1,4 +1,5 @@
 
+
 body {
     background-color: #d9d9d9;
     min-width: 400px;
@@ -7,7 +8,7 @@ body {
 */
 .coding-quiz {
     background-color: white;
-    margin-top: 40px;
+    margin-top: 30px;
     margin-bottom: 30px;
     padding: 15px;
     max-width: 768px;
@@ -17,6 +18,10 @@ body {
     text-align: center;
     background-color: #4257b2;
     color: #fff;
+}
+
+.heading-text {
+    padding: 16px;
 }
 
 .quiz-text {
