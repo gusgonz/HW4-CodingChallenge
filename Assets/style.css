@@ -1,8 +1,10 @@
+
 body {
-    background-color: rgb(199, 210, 221, .5);
+    background-color: #d9d9d9;
     min-width: 400px;
 }
-
+/* quizlet colors purple #4257b2, yellow #ffcd1f, blue #3ccfcf, grey #455358 background grey #d9d9d9;
+*/
 .coding-quiz {
     background-color: white;
     margin-top: 40px;
@@ -13,5 +15,24 @@ body {
 
 .heading {
     text-align: center;
-    
+    background-color: #4257b2;
+    color: #fff;
+}
+
+.quiz-text {
+    text-align: center;
+    color: #455358;
+}
+
+.buttons {
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+.start-quiz-btn {
+    margin-right: 20px;
+}
+
+.highscores-btn {
+    margin-left: 20px;
 }
