@@ -34,6 +34,23 @@ function showMain() {
     $(".main-btns").show();
 }
 
+function showQuestion() {
+    var questionCount = 0;
+    var codingQuiz = $(".coding-quiz");
+
+    for (var i = 0; i < 5; i++) {
+
+        if (i === 0) {
+            codingQuiz.append("<div class=question>");
+            var q = $(".question");
+            q.text(questions[questionCount].title);
+        } else {
+            codingQuiz.append("<div class= choices><input class=form-check-input type=radio name=exampleRadios  value=option1 checked>Option A</div>");
+            // $(".choices").addClass("row")
+        }
+    }
+};
+
 
 
 $(".start-quiz-btn").on("click", 
@@ -61,28 +78,8 @@ function startQuiz() {
            }
          }, 1000);
 
+    showQuestion();
     
-    var questionCount = 0;
-
-    for (var i = 0; i < 5; i++) {
-
-        if (i === 0) {
-            codingQuiz.append("<div class=question>");
-            var q = $(".question");
-            q.text(questions[questionCount].title);
-        } else {
-            
-        }
-
-
-
-    }
-    
-
-    
-
-
-
 
 
 
