@@ -16,14 +16,14 @@ var questions = [
     },
     {
     title: "What is the HTML tag under which one can write the JavaScript code?",
-    choices: ["<javascript>", "<scripted>", "<script>", "<js>"],
+    choices: ["javascript", "scripted", "script", "js"],
     answer: "<script>"
     }
   ];
 
 var  questionCount = 0;
 var codingQuiz = $(".coding-quiz");
-var timeLeft = 60;
+var timeLeft = 0;
 
 
 function hideMain() {
@@ -38,8 +38,17 @@ function showMain() {
     $(".main-btns").show();
 }
 
-function quiz() {
-    
+function endQuiz() {
+    timeLeft = 0;
+    $(".time-left").text(timeLeft);
+}
+
+function clearQuestion() {
+    $(".question").remove();
+    $(".choices").remove();
+}
+
+function showQuestion() {
     for (var i = 0; i < 5; i++) {
 
         if (i === 0) {
@@ -55,17 +64,44 @@ function quiz() {
             $(".choice-"+i).prepend(input);
         }
     }
+}
+
+function quiz() {
+    
+    showQuestion();
 
     $("input").click(function() {
 
         var userChoice = $(this).attr("value");
+        var answer = questions[questionCount].answer;
         console.log(userChoice);
+        console.log(answer);
+
+        if (userChoice === answer) {
+
+        } else {
+
+        }
+
+        clearQuestion();
+        questionCount++;
+        console.log(questionCount);
+
+        if (questionCount === 4) {
+            endQuiz();
+        } else {
+            quiz();
+        }
+
+        
+
     
     });
 
 };
 
 function startTimer() {
+    timeLeft = 60;
     // Creating and displaying timer with classes everywhere
     codingQuiz.append($("<div class =timer><p class=timer-text></p><span class=time-left></span></div>"));
     $(".timer").addClass("row justify-content-end")
@@ -78,7 +114,6 @@ function startTimer() {
          if (timeLeft >= 0) {
             $(".time-left").text(timeLeft);
          } else if (timeLeft === 0) {
-            // timesUp();
             return;
           }
         }, 1000);
