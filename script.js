@@ -183,7 +183,8 @@ function startTimer() {
          if (timeLeft > 0) {
             $(".time-left").text(timeLeft);
          } else if (timeLeft <= 0) {
-             learQuestion();
+            $(".time-left").text(timeLeft);
+            clearQuestion();
             endQuiz();
             return;
           }
