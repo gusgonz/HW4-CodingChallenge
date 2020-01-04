@@ -42,11 +42,26 @@ function showMain() {
 function enterHighscore() {
 
     codingQuiz.append("<div class=done><h1>All done!</h1>");
-    $(".done").addClass("col");
+    $(".done").addClass("row");
 
     codingQuiz.append("<div class=hs-text> <p class=col>Your final score is <span class=score></p></div>");
+    $(".hs-text").addClass("row");
     $(".score").addClass("col");
     $(".score").text(score);
+
+    codingQuiz.append("<div class=enter>");
+    enterRow = $(".enter");
+    enterRow.addClass("row");
+
+    enterRow.append("<p class=enter-text>Enter initials: </p>")
+    $(".enter-text").addClass("col-4");
+    enterRow.append("<input type=text class=hs-input>");
+    $(".hs-input").addClass("col-4 form-control");
+
+    enterRow.append("<button class=submit-btn>Submit</button>");
+    $(".submit-btn").addClass("col-4 btn btn-info")
+
+
     
 }
 
