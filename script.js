@@ -24,6 +24,7 @@ var questions = [
 var  questionCount = 0;
 var codingQuiz = $(".coding-quiz");
 var timeLeft = 0;
+var score = 0;
 
 
 function hideMain() {
@@ -38,9 +39,17 @@ function showMain() {
     $(".main-btns").show();
 }
 
+function enterHighscore() {
+
+}
+
 function endQuiz() {
+    score = timeLeft;
+    console.log(score);
+    
     timeLeft = 0;
-    $(".time-left").text(timeLeft);
+    enterHighscore();
+
 }
 
 function clearQuestion() {
@@ -66,7 +75,24 @@ function showQuestion() {
     }
 }
 
+function correct() {
+    codingQuiz.append($("<div class =correct><span>Correct!</span></div>"));
+    setTimeout(function(){
+        $(".correct").remove();
+      }, 1000);
+}
+
+function incorrect() {
+    codingQuiz.append($("<div class =incorrect><span>Incorrect!</span></div>"));
+    timeLeft -= 10;
+    $(".time-left").text(timeLeft);
+    setTimeout(function(){
+        $(".incorrect").remove();
+      }, 1000);
+}
+
 function quiz() {
+    
     
     showQuestion();
 
@@ -77,27 +103,26 @@ function quiz() {
         console.log(userChoice);
         console.log(answer);
 
-        if (userChoice === answer) {
-
-        } else {
-
-        }
-
         clearQuestion();
         questionCount++;
         console.log(questionCount);
 
         if (questionCount === 4) {
+            if (userChoice === answer) {
+                correct();
+            } else {
+                incorrect();
+            }
             endQuiz();
         } else {
             quiz();
+            if (userChoice === answer) {
+                correct();
+            } else {
+                incorrect();
+            }
         }
-
-        
-
-    
     });
-
 };
 
 function startTimer() {
@@ -132,9 +157,3 @@ function startQuiz() {
     quiz();
 
 });
-
-// $(document).ready(function() {
-// // The choices will now have a click event listener
-
-
-// });
