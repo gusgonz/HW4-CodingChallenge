@@ -17,7 +17,7 @@ var questions = [
     {
     title: "What is the HTML tag under which one can write the JavaScript code?",
     choices: ["javascript", "scripted", "script", "js"],
-    answer: "<script>"
+    answer: "script"
     }
   ];
 
@@ -25,6 +25,8 @@ var  questionCount = 0;
 var codingQuiz = $(".coding-quiz");
 var timeLeft = 0;
 var score = 0;
+var highscores = [];
+var interval;
 
 
 function hideMain() {
@@ -53,15 +55,29 @@ function enterHighscore() {
     enterRow = $(".enter");
     enterRow.addClass("row");
 
-    enterRow.append("<p class=enter-text>Enter initials: </p>")
+    enterRow.append("<p class=enter-text>Enter initials: </p>");
     $(".enter-text").addClass("col-4");
     enterRow.append("<input type=text class=hs-input>");
     $(".hs-input").addClass("col-4 form-control");
 
     enterRow.append("<button class=submit-btn>Submit</button>");
-    $(".submit-btn").addClass("col-4 btn btn-info")
+    $(".submit-btn").addClass("col-4 btn btn-info");
 
+    $(".submit-btn").click(function() {
+        var initials = $(".hs-input").val();
+        var scoreObject = {initials: initials, score: score};
+        highscores.push(scoreObject);
+        score = 0;
 
+        var highscoresString = JSON.stringify(highscores);
+        localStorage.setItem("highscores",highscoresString);
+
+        $(".done").remove();
+        $(".hs-text").remove();
+        $(".enter").remove();
+        $(".timer").remove();
+        showMain();
+    });
     
 }
 
@@ -70,7 +86,10 @@ function endQuiz() {
     console.log(score);
     
     timeLeft = 0;
+    clearInterval(interval);
+    questionCount = 0;
     enterHighscore();
+    
 
 }
 
@@ -156,7 +175,7 @@ function startTimer() {
     $(".time-left").text(timeLeft);
 
     // Starts countdown. If the coundown ends, run times up function and end timer function
-    setInterval(function() {
+    interval = setInterval(function() {
         timeLeft--;
          if (timeLeft >= 0) {
             $(".time-left").text(timeLeft);
