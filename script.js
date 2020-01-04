@@ -25,8 +25,11 @@ var  questionCount = 0;
 var codingQuiz = $(".coding-quiz");
 var timeLeft = 0;
 var score = 0;
-var highscores = [];
 var interval;
+var highscores = JSON.parse(localStorage.getItem("highscores"));
+if (highscores === null) {
+    highscores = [];
+} 
 
 
 function hideMain() {
@@ -138,7 +141,7 @@ function quiz() {
     showQuestion();
 
     $("input").click(function() {
-
+        event.preventDefault();
         var userChoice = $(this).attr("value");
         var answer = questions[questionCount].answer;
         console.log(userChoice);
@@ -185,6 +188,18 @@ function startTimer() {
         }, 1000);
 };
 
+$(".highscores-btn").click(function() {
+    var storedScores = localStorage.getItem("highscores");
+    storedScores = JSON.parse(storedScores);
+
+  if (storedScores !== null){
+     
+     storedScores.sort(function(a,b){return a.score < b.score});
+     console.log(storedScores);
+
+  }
+
+});
 
 
 // Start quiz button on click hides the main page content, starts and shows the timer, and shows the first question
