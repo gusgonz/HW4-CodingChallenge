@@ -2,7 +2,7 @@
 
 body {
     background-color: #d9d9d9;
-    min-width: 400px;
+    min-width: 420px;
     font-family: 'Source Sans Pro', sans-serif;
 
 }
@@ -21,7 +21,6 @@ body {
     background-color: #4257b2;
     color: #fff;
     height: 70px;
-    
 }
 
 .heading-text {
@@ -44,4 +43,10 @@ body {
 
 .highscores-btn {
     margin-left: 20px;
+}
+
+@media only screen and (max-width: 575px) {
+    .buttons {
+        margin: 5px;
+    }
 }
