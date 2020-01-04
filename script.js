@@ -22,17 +22,24 @@ var questions = [
   ];
 
 
-function hideThings() {
+function hideMain() {
     // Hiding whats there with jQuery
     $(".quiz-text").hide();
     $(".main-btns").hide();
 }
 
+function showMain() {
+    // Showing main things with jQuery
+    $(".quiz-text").show();
+    $(".main-btns").show();
+}
+
+
 
 $(".start-quiz-btn").on("click", 
 function startQuiz() {
     
-    hideThings();
+    hideMain();
 
     var codingQuiz = $(".coding-quiz");
     var timeLeft = 60;
@@ -55,7 +62,21 @@ function startQuiz() {
          }, 1000);
 
     
+    var questionCount = 0;
 
+    for (var i = 0; i < 5; i++) {
+
+        if (i === 0) {
+            codingQuiz.append("<div class=question>");
+            var q = $(".question");
+            q.text(questions[questionCount].title);
+        } else {
+            
+        }
+
+
+
+    }
     
 
     

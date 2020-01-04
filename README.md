@@ -4,5 +4,4 @@ A timer-based quiz application with multiple choice coding questions that stores
 
 
 
-
-testing icon on homepage by Unlimiticon from the Noun Project
+created favicon using favicon.io's favicon generator
