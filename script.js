@@ -21,6 +21,10 @@ var questions = [
     }
   ];
 
+var  questionCount = 0;
+var codingQuiz = $(".coding-quiz");
+var timeLeft = 60;
+
 
 function hideMain() {
     // Hiding whats there with jQuery
@@ -34,10 +38,8 @@ function showMain() {
     $(".main-btns").show();
 }
 
-function showQuestion() {
-    var questionCount = 0;
-    var codingQuiz = $(".coding-quiz");
-
+function quiz() {
+    
     for (var i = 0; i < 5; i++) {
 
         if (i === 0) {
@@ -45,43 +47,59 @@ function showQuestion() {
             var q = $(".question");
             q.text(questions[questionCount].title);
         } else {
-            codingQuiz.append("<div class= choices><input class=form-check-input type=radio name=exampleRadios  value=option1 checked>Option A</div>");
-            // $(".choices").addClass("row")
+            codingQuiz.append("<div class= choice-"+i +">");
+            $(".choice-"+i).addClass("row choices");
+            $(".choice-"+i).text(questions[questionCount].choices[i-1]);
+
+            var input = $("<input class=form-check-input type=radio name=QuestionChoices value="+questions[questionCount].choices[i-1]+">"+questions[questionCount].choices[i-1]);
+            $(".choice-"+i).prepend(input);
         }
     }
+
+    $("input").click(function() {
+
+        var userChoice = $(this).attr("value");
+        console.log(userChoice);
+    
+    });
+
+};
+
+function startTimer() {
+    // Creating and displaying timer with classes everywhere
+    codingQuiz.append($("<div class =timer><p class=timer-text></p><span class=time-left></span></div>"));
+    $(".timer").addClass("row justify-content-end")
+    $(".timer-text").text("Time Remaining:");
+    $(".time-left").text(timeLeft);
+
+    // Starts countdown. If the coundown ends, run times up function and end timer function
+    setInterval(function() {
+        timeLeft--;
+         if (timeLeft >= 0) {
+            $(".time-left").text(timeLeft);
+         } else if (timeLeft === 0) {
+            // timesUp();
+            return;
+          }
+        }, 1000);
 };
 
 
 
+// Start quiz button on click hides the main page content, starts and shows the timer, and shows the first question
 $(".start-quiz-btn").on("click", 
 function startQuiz() {
     
     hideMain();
-
-    var codingQuiz = $(".coding-quiz");
-    var timeLeft = 60;
     
-     // Creating and displaying timer with classes everywhere
-     codingQuiz.append($("<div class =timer><p class=timer-text></p><span class=time-left></span></div>"));
-     $(".timer").addClass("row justify-content-end")
-     $(".timer-text").text("Time Remaining:");
-     $(".time-left").text(timeLeft);
- 
-     // Starts countdown. If the coundown ends, run times up function and end timer function
-     setInterval(function() {
-         timeLeft--;
-          if (timeLeft >= 0) {
-             $(".time-left").text(timeLeft);
-          } else if (timeLeft === 0) {
-             // timesUp();
-             return;
-           }
-         }, 1000);
-
-    showQuestion();
+    startTimer();
     
-
-
-
+    quiz();
 
 });
+
+// $(document).ready(function() {
+// // The choices will now have a click event listener
+
+
+// });

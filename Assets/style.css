@@ -60,3 +60,22 @@ body {
         margin: 5px;
     }
 }
+
+.choices {
+    margin-left: 20px;
+    font-size: 20px;
+    line-height: 1.5;
+}
+
+.choice-4 {
+    margin-bottom: 20px;
+}
+
+.question {
+    font-size: 24px;
+    margin-bottom: 15px;
+}
+
+input {
+    margin-right: 10px;
+}
