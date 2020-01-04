@@ -21,15 +21,14 @@ function startQuiz() {
     $(".timer-text").text("Time Remaining:");
     $(".time-left").text(timeLeft);
 
+    // Starts countdown. If the coundown ends, run times up function and end timer function
     setInterval(function() {
-        counter--;
-         if (counter >= 0) {
-            span = document.getElementById("count");
-            span.innerHTML = counter;
-         }
-         if (counter === 0) {
-            alert('sorry, out of time');
-            clearInterval(counter);
+        timeLeft--;
+         if (timeLeft >= 0) {
+            $(".time-left").text(timeLeft);
+         } else if (timeLeft === 0) {
+            // timesUp();
+            return;
           }
         }, 1000);
 
