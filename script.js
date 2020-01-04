@@ -14,11 +14,24 @@ function startQuiz() {
     $(".quiz-text").hide();
     $(".main-btns").hide();
 
-    // Creating and starting timer
+    // Creating and displaying timer with classes everywhere
     var timeLeft = 60;
-    codingQuiz.append($("<div class =timer><p class=timer-text></p></div>"));
-    $(".timer-text").text("Time Remaining: " + timeLeft);
-    
+    codingQuiz.append($("<div class =timer><p class=timer-text></p><span class=time-left></span></div>"));
+    $(".timer").addClass("row justify-content-end")
+    $(".timer-text").text("Time Remaining:");
+    $(".time-left").text(timeLeft);
+
+    setInterval(function() {
+        counter--;
+         if (counter >= 0) {
+            span = document.getElementById("count");
+            span.innerHTML = counter;
+         }
+         if (counter === 0) {
+            alert('sorry, out of time');
+            clearInterval(counter);
+          }
+        }, 1000);
 
 
 

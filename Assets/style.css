@@ -39,6 +39,10 @@ body {
     text-align: right;
 }
 
+.timer-text {
+    margin-right: 4px;
+}
+
 .buttons {
     margin-top: 10px;
     margin-bottom: 5px;
