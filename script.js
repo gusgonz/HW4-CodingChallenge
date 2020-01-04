@@ -30,6 +30,7 @@ var highscores = JSON.parse(localStorage.getItem("highscores"));
 if (highscores === null) {
     highscores = [];
 } 
+var hsList = $(".highscores-list");
 
 
 function hideMain() {
@@ -137,7 +138,6 @@ function incorrect() {
 
 function quiz() {
     
-    
     showQuestion();
 
     $("input").click(function() {
@@ -180,25 +180,46 @@ function startTimer() {
     // Starts countdown. If the coundown ends, run times up function and end timer function
     interval = setInterval(function() {
         timeLeft--;
-         if (timeLeft >= 0) {
+         if (timeLeft > 0) {
             $(".time-left").text(timeLeft);
-         } else if (timeLeft === 0) {
+         } else if (timeLeft <= 0) {
+             learQuestion();
+            endQuiz();
             return;
           }
         }, 1000);
 };
 
+
 $(".highscores-btn").click(function() {
+
     var storedScores = localStorage.getItem("highscores");
     storedScores = JSON.parse(storedScores);
 
+    console.log(storedScores !== null);
   if (storedScores !== null){
      
-     storedScores.sort(function(a,b){return a.score < b.score});
+     storedScores.sort(function(a,b){return (b.score - a.score)});
      console.log(storedScores);
+     hsList.empty();
 
+     for (var i=0; i<storedScores.length;i++) {
+       hsList.append("<div class=score-"+(i+1)+">");
+       var currentScoreClass = ".score-"+(i+1);
+       console.log(currentScoreClass);
+
+       $(currentScoreClass).addClass("hs-list");
+
+       $(currentScoreClass).text(i+1+". "+storedScores[i].initials+" "+storedScores[i].score);
+     }
   }
+});
 
+$(".clear-btn").click(function() {
+    event.preventDefault();
+    localStorage.clear();
+    highscores = [];
+    $(".hs-list").remove();
 });
 
 
