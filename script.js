@@ -41,6 +41,13 @@ function showMain() {
 
 function enterHighscore() {
 
+    codingQuiz.append("<div class=done><h1>All done!</h1>");
+    $(".done").addClass("col");
+
+    codingQuiz.append("<div class=hs-text> <p class=col>Your final score is <span class=score></p></div>");
+    $(".score").addClass("col");
+    $(".score").text(score);
+    
 }
 
 function endQuiz() {

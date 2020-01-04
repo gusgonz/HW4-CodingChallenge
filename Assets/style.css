@@ -76,3 +76,16 @@ body {
     font-size: 24px;
     margin-bottom: 15px;
 }
+
+.done {
+    margin-left: 0px;
+}
+
+.hs-text {
+    font-size: 24px;
+}
+
+.score {
+    font-size: 30px;
+    padding-left: 0px;
+}
