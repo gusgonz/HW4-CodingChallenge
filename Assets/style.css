@@ -30,6 +30,13 @@ body {
 .quiz-text {
     text-align: center;
     color: #455358;
+    font-size: 20px;
+    text-align: right;
+}
+
+.timer {
+    width: 100%;
+    text-align: right;
 }
 
 .buttons {
