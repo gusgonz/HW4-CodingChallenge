@@ -1,6 +1,8 @@
 # HW4-CodingChallenge
 A timer-based quiz application with multiple choice coding questions that stores player high scores client-side. This application heavily features jQuery for all DOM manipulation.
 
+Deployed site: https://gusgonz.github.io/HW4-CodingChallenge/
+
 ## Installation
 
 Just download and run.
