@@ -1,27 +1,28 @@
 var questions = [
     {
-    title: "Commonly used data types DO NOT include:",
-    choices: ["strings", "booleans", "alerts", "numbers"],
-    answer: "alerts"
+        title: "Commonly used data types DO NOT include:",
+        choices: ["strings", "booleans", "alerts", "numbers"],
+        answer: "alerts"
     },
     {
-    title: "The condition in an if / else statement is enclosed within ____.",
-    choices: ["quotes", "curly brackets", "parentheses", "square brackets"],
-    answer: "parentheses"
+        title: "The condition in an if / else statement is enclosed within ____.",
+        choices: ["quotes", "curly brackets", "parentheses", "square brackets"],
+        answer: "parentheses"
     },
     {
-    title: "Which built-in method adds one or more elements to the end of an array and returns the new length of the array?",
-    choices: ["last()", "put()", "push()", "None of the above"],
-    answer: "push()"
+        title: "Which built-in method adds one or more elements to the end of an array and returns the new length of the array?",
+        choices: ["last()", "put()", "push()", "None of the above"],
+        answer: "push()"
     },
     {
-    title: "What is the HTML tag under which one can write the JavaScript code?",
-    choices: ["javascript", "scripted", "script", "js"],
-    answer: "script"
+        title: "What is the HTML tag under which one can write the JavaScript code?",
+        choices: ["javascript", "scripted", "script", "js"],
+        answer: "script"
     }
-  ];
+];
 
-var  questionCount = 0;
+
+var questionCount = 0;
 var codingQuiz = $(".coding-quiz");
 var timeLeft = 0;
 var score = 0;
@@ -29,7 +30,7 @@ var interval;
 var highscores = JSON.parse(localStorage.getItem("highscores"));
 if (highscores === null) {
     highscores = [];
-} 
+}
 var hsList = $(".highscores-list");
 
 
@@ -67,14 +68,14 @@ function enterHighscore() {
     enterRow.append("<button class=submit-btn>Submit</button>");
     $(".submit-btn").addClass("col-4 btn btn-info");
 
-    $(".submit-btn").click(function() {
+    $(".submit-btn").click(function () {
         var initials = $(".hs-input").val();
-        var scoreObject = {initials: initials, score: score};
+        var scoreObject = { initials: initials, score: score };
         highscores.push(scoreObject);
         score = 0;
 
         var highscoresString = JSON.stringify(highscores);
-        localStorage.setItem("highscores",highscoresString);
+        localStorage.setItem("highscores", highscoresString);
 
         $(".done").remove();
         $(".hs-text").remove();
@@ -82,18 +83,18 @@ function enterHighscore() {
         $(".timer").remove();
         showMain();
     });
-    
+
 }
 
 function endQuiz() {
     score = timeLeft;
     console.log(score);
-    
+
     timeLeft = 0;
     clearInterval(interval);
     questionCount = 0;
     enterHighscore();
-    
+
 
 }
 
@@ -110,37 +111,37 @@ function showQuestion() {
             var q = $(".question");
             q.text(questions[questionCount].title);
         } else {
-            codingQuiz.append("<div class= choice-"+i +">");
-            $(".choice-"+i).addClass("row choices");
-            $(".choice-"+i).text(questions[questionCount].choices[i-1]);
+            codingQuiz.append("<div class= choice-" + i + ">");
+            $(".choice-" + i).addClass("row choices");
+            $(".choice-" + i).text(questions[questionCount].choices[i - 1]);
 
-            var input = $("<input class=form-check-input type=radio name=QuestionChoices value="+questions[questionCount].choices[i-1]+">"+questions[questionCount].choices[i-1]);
-            $(".choice-"+i).prepend(input);
+            var input = $("<input class=form-check-input type=radio name=QuestionChoices value=" + questions[questionCount].choices[i - 1] + ">" + questions[questionCount].choices[i - 1]);
+            $(".choice-" + i).prepend(input);
         }
     }
 }
 
 function correct() {
     codingQuiz.append($("<div class =correct><span>Correct!</span></div>"));
-    setTimeout(function(){
+    setTimeout(function () {
         $(".correct").remove();
-      }, 1000);
+    }, 1000);
 }
 
 function incorrect() {
     codingQuiz.append($("<div class =incorrect><span>Incorrect!</span></div>"));
     timeLeft -= 10;
     $(".time-left").text(timeLeft);
-    setTimeout(function(){
+    setTimeout(function () {
         $(".incorrect").remove();
-      }, 1000);
+    }, 1000);
 }
 
 function quiz() {
-    
+
     showQuestion();
 
-    $("input").click(function() {
+    $("input").click(function () {
         event.preventDefault();
         var userChoice = $(this).attr("value");
         var answer = questions[questionCount].answer;
@@ -178,45 +179,45 @@ function startTimer() {
     $(".time-left").text(timeLeft);
 
     // Starts countdown. If the coundown ends, run times up function and end timer function
-    interval = setInterval(function() {
+    interval = setInterval(function () {
         timeLeft--;
-         if (timeLeft > 0) {
+        if (timeLeft > 0) {
             $(".time-left").text(timeLeft);
-         } else if (timeLeft <= 0) {
+        } else if (timeLeft <= 0) {
             $(".time-left").text(timeLeft);
             clearQuestion();
             endQuiz();
             return;
-          }
-        }, 1000);
+        }
+    }, 1000);
 };
 
 
-$(".highscores-btn").click(function() {
+$(".highscores-btn").click(function () {
 
     var storedScores = localStorage.getItem("highscores");
     storedScores = JSON.parse(storedScores);
 
     console.log(storedScores !== null);
-  if (storedScores !== null){
-     
-     storedScores.sort(function(a,b){return (b.score - a.score)});
-     console.log(storedScores);
-     hsList.empty();
+    if (storedScores !== null) {
 
-     for (var i=0; i<storedScores.length;i++) {
-       hsList.append("<div class=score-"+(i+1)+">");
-       var currentScoreClass = ".score-"+(i+1);
-       console.log(currentScoreClass);
+        storedScores.sort(function (a, b) { return (b.score - a.score) });
+        console.log(storedScores);
+        hsList.empty();
 
-       $(currentScoreClass).addClass("hs-list");
+        for (var i = 0; i < storedScores.length; i++) {
+            hsList.append("<div class=score-" + (i + 1) + ">");
+            var currentScoreClass = ".score-" + (i + 1);
+            console.log(currentScoreClass);
 
-       $(currentScoreClass).text(i+1+". "+storedScores[i].initials+" "+storedScores[i].score);
-     }
-  }
+            $(currentScoreClass).addClass("hs-list");
+
+            $(currentScoreClass).text(i + 1 + ". " + storedScores[i].initials + " " + storedScores[i].score);
+        }
+    }
 });
 
-$(".clear-btn").click(function() {
+$(".clear-btn").click(function () {
     event.preventDefault();
     localStorage.clear();
     highscores = [];
@@ -225,13 +226,13 @@ $(".clear-btn").click(function() {
 
 
 // Start quiz button on click hides the main page content, starts and shows the timer, and shows the first question
-$(".start-quiz-btn").on("click", 
-function startQuiz() {
-    
-    hideMain();
-    
-    startTimer();
-    
-    quiz();
+$(".start-quiz-btn").on("click",
+    function startQuiz() {
 
-});
+        hideMain();
+
+        startTimer();
+
+        quiz();
+
+    });
