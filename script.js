@@ -217,7 +217,7 @@ $(".highscores-btn").click(function () {
     }
 });
 
-$(".clear-btn").click(function () {
+$(".clear-btn").click(function (event) {
     event.preventDefault();
     localStorage.clear();
     highscores = [];
